@@ -46,7 +46,7 @@ env:
   # 🖊️ EDIT to change the image registry settings.
   # Registries such as GHCR, Quay.io, and Docker Hub are supported.
   REGISTRY: agbate.jfrog.io/default-docker-virtual
-  REGISTRY_USER: agbate.jfrog.io
+  REGISTRY_USER: agbate@ibm.com
   REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
 
   # 🖊️ EDIT to specify custom tags for the container image, or default tags will be generated below.
