@@ -1,240 +1,545 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>Red Hat and GitHub Actions</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+  <title>Red Hat and GitHub Actions</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Montserrat"
+  />
+  <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+  />
 
-<style>
-  body,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: "Lato", sans-serif
-  }
-
-  .w3-bar,
-  h1,
-  button {
-    font-family: "Montserrat", sans-serif
-  }
-
-  .fa-anchor,
-  .fa-coffee {
-    font-size: 200px
-  }
-
-  .top:after {
-    display: block;
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 5px;
-    bottom: -5px;
-    background: linear-gradient(180deg,rgba(63,64,65,.85),transparent);
-    z-index: -5;
-}
-
-  .kroger {
-    position: fixed;
-    top: 48px;
-    right: 45%;
-    width: 100%;
-    height: 70px;
-  }
-
-  @media only screen and (max-width: 1920px) {
-    .kroger {
-      right: 44%;
+  <style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: -apple-system, BlinkMacSystemFont, Roboto, Segoe UI,
+        system-ui, Oxygen, Ubuntu, Cantarell, Droid Sans, Helvetica Neue,
+        sans-serif;
+      background: #fff;
+      color: #1d1e1f;
     }
-  }
 
-  @media only screen and (max-width: 1620px) {
-    .kroger {
-      right: 40%;
+    .w3-bar,
+    h1,
+    button {
+      font-family: 'Montserrat', sans-serif;
     }
-  }
 
-  @media only screen and (max-width: 950px) {
-    .kroger {
-      right: 37.5%;
+    .fa-anchor,
+    .fa-coffee {
+      font-size: 200px;
     }
-  }
 
-  @media only screen and (max-width: 750px) {
-    .kroger {
-      right: 35%;
+    .top:after {
+      display: block;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 5px;
+      bottom: -5px;
+      background: linear-gradient(180deg, rgba(63, 64, 65, 0.85), transparent);
+      z-index: -5;
     }
-  }
 
-  .ibm {
-    position: fixed;
-    top: 58px;
-    left: 45%;
-    width: 100%;
-    height: 70px;
-  }
+    .kroger {
+      position: fixed;
+      top: 48px;
+      right: 45%;
+      width: 100%;
+      height: 70px;
+    }
 
-  @media only screen and (max-width: 1660px) {
+    @media only screen and (max-width: 1920px) {
+      .kroger {
+        right: 44%;
+      }
+    }
+
+    @media only screen and (max-width: 1620px) {
+      .kroger {
+        right: 40%;
+      }
+    }
+
+    @media only screen and (max-width: 950px) {
+      .kroger {
+        right: 37.5%;
+      }
+    }
+
+    @media only screen and (max-width: 750px) {
+      .kroger {
+        right: 35%;
+      }
+    }
+
     .ibm {
-      left: 42.5%;
+      position: fixed;
+      top: 58px;
+      left: 45%;
+      width: 100%;
+      height: 70px;
     }
-  }
 
-  @media only screen and (max-width: 950px) {
-    .ibm {
-      right: 37.5%;
+    @media only screen and (max-width: 1660px) {
+      .ibm {
+        left: 42.5%;
+      }
     }
-  }
 
-  .image-container {
-    width: 100%;
-    height: 125px;
-    background-color: rgb(8,73,153);
-    margin: auto;
-  }
+    @media only screen and (max-width: 950px) {
+      .ibm {
+        left: 37.5%;
+      }
+    }
 
-  @media only screen and (min-width: 1300px) {
     .image-container {
-      width: 1300px;
+      width: 100%;
+      height: 125px;
+      background-color: rgb(8, 73, 153);
+      margin: auto;
     }
-  }
 
-</style>
+    @media only screen and (min-width: 1300px) {
+      .image-container {
+        width: 1300px;
+      }
+    }
 
-<body>
-  <!-- Fixed Positions -->
-  <div style="position: fixed;top: 0px;background-color:#385397;height:35px;width:100%">&nbsp;</div>
-  <div class="top" style="position: fixed;top: 35px;background-color:white;height:100px;width:100%;border-bottom-style:solid;border-bottom-width:1px;border-color:lightgrey;">&nbsp;</div>
-  
+    .header-one {
+      margin: auto;
+      color: white;
+      background-color: rgb(8, 73, 153);
+      padding-top: 30px;
+    }
 
-  <!-- Header -->
-  <header class="w3-container w3-center" style="padding:75px 0px;border-bottom-style:solid;border-bottom-width:1px;border-color:black;">
-    <div class="kroger">
-      <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="175px" height="75px" viewBox="0 0 611.7 227.17"><defs><style>.cls-1{fill:#21409a;}</style></defs><path class="cls-1" d="M529.46,274V263.34H510.05v65.55h19.87V292.57q5.12-11.38,17.26-11.39a33.59,33.59,0,0,1,7,.7V263.05a18.24,18.24,0,0,0-6.22-.93q-10.11,0-18.53,11.91" transform="translate(-215.97 -178.98)"/><path class="cls-1" d="M583.46,307.37a17.53,17.53,0,0,1,0-22.54,14.26,14.26,0,0,1,20.16-.9q.46.44.9.9a17.44,17.44,0,0,1,0,22.51,14.3,14.3,0,0,1-20.21.85c-.29-.27-.58-.55-.85-.85m34.39,12.89q9.63-9.8,9.62-24.2a33.12,33.12,0,0,0-9.62-24.12,33.85,33.85,0,0,0-47.73,0,35,35,0,0,0,0,48.16,33.84,33.84,0,0,0,47.73.11" transform="translate(-215.97 -178.98)"/><path class="cls-1" d="M730,289.84a16.06,16.06,0,0,1,4.94-8.42,12.14,12.14,0,0,1,8.13-3,11.29,11.29,0,0,1,8,3.44,13.71,13.71,0,0,1,4.27,7.95Zm13.48-27.72A31.76,31.76,0,0,0,720,271.77q-9.59,9.64-9.58,24.29,0,15,9.18,24.49t24,9.5q10,0,17.09-3.73a47.11,47.11,0,0,0,13-10.32l-14.41-8.06q-5.5,5.06-14.44,5.06-12.86,0-15.11-11.39h45.09a14.18,14.18,0,0,1,.12-1.59c.07-.68.13-1.3.17-1.86s.06-1,.06-1.43q0-14.4-8.89-24.52T743.44,262.1" transform="translate(-215.97 -178.98)"/><path class="cls-1" d="M821.49,262.12q-10.11,0-18.54,11.91V263.34H783.54v65.55h19.88V292.57q5.1-11.38,17.25-11.39a33.59,33.59,0,0,1,7,.7V263.05a18.18,18.18,0,0,0-6.21-.93" transform="translate(-215.97 -178.98)"/><path class="cls-1" d="M490.89,251a61.88,61.88,0,0,0,.53-6.8h0a46.51,46.51,0,0,1,93-1.93c0,.65,0,1.29,0,1.93H603.2a65.24,65.24,0,0,0-130.47-1.12h0a42.43,42.43,0,0,1-.39,5.52c-.86,6.66-3.35,16.26-10.31,24.18-5.45,6.2-12.91,10.39-22.25,12.57V241.78h-21v87.11h21V304.48a69.92,69.92,0,0,0,17.87-5.54l19,29.95h25.16L474,287.35c.7-.72,1.4-1.45,2.07-2.21,10.09-11.48,13.63-24.91,14.82-34.16" transform="translate(-215.97 -178.98)"/><path class="cls-1" d="M679.18,306.24a14.78,14.78,0,0,1-20.9.26l-.26-.26a17.07,17.07,0,0,1,0-22.17,14.75,14.75,0,0,1,20.84-.29l.29.29a17.22,17.22,0,0,1,0,22.17M702,348.05V263.34H683.1v5.58a22.72,22.72,0,0,0-16.91-6.8q-12.62,0-21.85,9.49t-9.24,23.52q0,14,9.47,23.28t21.62,9.31a28.29,28.29,0,0,0,17.14-5.44v25.77h0a40,40,0,1,1-80,0h-18.7A58.71,58.71,0,0,0,702,349.79h0v-1.74Z" transform="translate(-215.97 -178.98)"/><path class="cls-1" d="M708.2,378.25h.8c.87,0,1.57-.29,1.57-1s-.45-1-1.45-1a3.66,3.66,0,0,0-.87.08Zm0,3.85h-1.57v-6.79a12.71,12.71,0,0,1,2.61-.21,4.21,4.21,0,0,1,2.36.5,1.89,1.89,0,0,1,.66,1.49,1.74,1.74,0,0,1-1.41,1.57v.09a2,2,0,0,1,1.24,1.65,5.37,5.37,0,0,0,.5,1.7h-1.7a6,6,0,0,1-.54-1.66c-.12-.74-.54-1.07-1.41-1.07h-.74Zm-4.2-3.56a5.26,5.26,0,0,0,5.1,5.42h.2a5.2,5.2,0,0,0,5.18-5.22v-.16a5.24,5.24,0,1,0-10.48,0v0m12.22,0a7,7,0,1,1-7.2-6.8h.2a6.84,6.84,0,0,1,7,6.66v.14" transform="translate(-215.97 -178.98)"/><path class="cls-1" d="M281.11,319.05A11.12,11.12,0,1,1,270,307.78a11.12,11.12,0,0,1,11.11,11.27Z" transform="translate(-215.97 -178.98)"/><ellipse class="cls-1" cx="146.01" cy="140.07" rx="11.12" ry="11.26"/><path class="cls-1" d="M269.33,245.12a2.57,2.57,0,0,1,.62-2,2.52,2.52,0,0,1,1.9-.87H302a2.52,2.52,0,0,1,2.2,1.29,2.62,2.62,0,0,1,0,2.57l-15.53,27.26a2.53,2.53,0,0,1-3.45,1,2.63,2.63,0,0,1-.4-.28,45.65,45.65,0,0,1-15.34-27.68C269.44,246.07,269.39,245.62,269.33,245.12Zm48.78,39.61a44.08,44.08,0,0,1-21.69-3.44,2.56,2.56,0,0,1-1.42-1.55,2.61,2.61,0,0,1,.21-2.1l18-31.53a2.52,2.52,0,0,1,4.4,0L335,276.63a2.55,2.55,0,0,1-1.07,3.56,44.62,44.62,0,0,1-15.82,4.54Zm30.51-16.28a45.62,45.62,0,0,1-3.53,3.83A2.5,2.5,0,0,1,343,273a2.53,2.53,0,0,1-1.84-1.26L326.55,246.1a2.57,2.57,0,0,1,0-2.57,2.52,2.52,0,0,1,2.2-1.29h27.39a2.54,2.54,0,0,1,1.91.87,2.65,2.65,0,0,1,.62,2,45.73,45.73,0,0,1-10.05,23.34Z" transform="translate(-215.97 -178.98)"/><path class="cls-1" d="M367.64,242.24c-1.78,26-22,47.68-48.41,50.15-29.33,2.74-55.43-19.23-58.13-49C258.65,216.51,241.36,199,216,197.78v18.73c15.69,1.15,25.19,11.25,26.77,28.6,3.43,37.73,34.84,66.16,71.54,66.16q3.29,0,6.65-.31c36-3.36,63.38-33.2,65.18-68.75Z" transform="translate(-215.97 -178.98)"/></svg>
+    @media only screen and (max-width: 950px) {
+      .header-one {
+        padding-top: 10px;
+      }
+    }
+
+    .ibm-ce {
+      height: 250px;
+      width: 250px;
+      margin: auto;
+      border-radius: 10rem;
+      border: 1.5px solid black;
+    }
+
+    .bottom-images {
+      border-radius: 0.5rem;
+      margin: auto;
+      display: inline-block;
+    }
+
+    @media only screen and (max-width: 1300px) {
+      .bottom-images {
+        height: 22.5%;
+        width: 22.5%;
+      }
+    }
+  </style>
+
+  <body>
+    <!-- Fixed Positions -->
+    <div
+      style="
+        position: fixed;
+        top: 0px;
+        background-color: #385397;
+        height: 35px;
+        width: 100%;
+      "
+    >
+      &nbsp;
     </div>
-    <div class="ibm">
-      <svg version="1.1" id="Livello_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="50px" viewBox="0 0 1000 401.149" enable-background="new 0 0 1000 401.149" xml:space="preserve">
-        <g>
-        <g>
-          <polygon id="Rectangle-path" fill="#1F70C1" points="0,373.217 194.433,373.217 194.433,401.05 0,401.05 		"/>
-          <polygon id="Rectangle-path_1_" fill="#1F70C1" points="0,319.83 194.433,319.83 194.433,347.761 0,347.761 		"/>
-          <polygon id="Rectangle-path_2_" fill="#1F70C1" points="55.468,266.541 138.867,266.541 138.867,294.473 55.468,294.473 		"/>
-          <polygon id="Rectangle-path_3_" fill="#1F70C1" points="55.468,213.253 138.867,213.253 138.867,241.185 55.468,241.185 		"/>
-          <polygon id="Rectangle-path_4_" fill="#1F70C1" points="55.468,159.964 138.867,159.964 138.867,187.896 55.468,187.896 		"/>
-          <polygon id="Rectangle-path_5_" fill="#1F70C1" points="55.468,106.577 138.867,106.577 138.867,134.509 55.468,134.509 		"/>
-          <rect id="Rectangle-path_6_" y="53.288" fill="#1F70C1" width="194.433" height="27.932"/>
-          <rect id="Rectangle-path_7_" fill="#1F70C1" width="194.433" height="27.932"/>
-        </g>
-        <g>
-          <path id="Shape_16_" fill="#1F70C1" d="M222.167,347.761h299.029c5.051-8.617,8.815-18.027,11.094-27.932H222.167V347.761z"/>
-          <path id="Shape_17_" fill="#1F70C1" d="M497.92,213.253H277.734v27.932h243.463C514.857,230.487,507.032,221.078,497.92,213.253z"/>
-          <path id="Shape_18_" fill="#1F70C1" d="M277.734,159.964v27.932H497.92c9.311-7.825,17.135-17.235,23.277-27.932H277.734z"/>
-          <path id="Shape_19_" fill="#1F70C1" d="M521.197,53.288H222.167V81.22H532.29C529.715,71.315,525.951,61.906,521.197,53.288z"/>
-          <path id="Shape_20_" fill="#1F70C1" d="M429.279,0H222.167v27.932h278.526C482.072,10.697,456.815,0,429.279,0z"/>
-          <rect id="Rectangle-path_8_" x="277.734" y="106.577" fill="#1F70C1" width="83.3" height="27.932"/>
-          <path id="Shape_21_" fill="#1F70C1" d="M444.433,134.509h87.163c2.476-8.914,3.764-18.324,3.764-27.932h-90.927L444.433,134.509L444.433,134.509z"/>
-          <polygon id="Rectangle-path_9_" fill="#1F70C1" points="277.734,266.541 361.034,266.541 361.034,294.473 277.734,294.473"/>
-          <path id="Shape_22_" fill="#1F70C1" d="M444.433,266.541v27.932h90.927c0-9.608-1.288-19.017-3.764-27.932H444.433z"/>
-          <path id="Shape_23_" fill="#1F70C1" d="M222.167,400.852l207.112,0.297c27.734,0,52.793-10.697,71.513-27.932H222.167V400.852z"/>
-        </g>
-        <g>
-          <polygon id="Rectangle-path_10_" fill="#1F70C1" points="555.567,373.217 694.433,373.217 694.433,401.05 555.567,401.05"/>
-          <polygon id="Rectangle-path_11_" fill="#1F70C1" points="555.567,319.83 694.433,319.83 694.433,347.761 555.567,347.761"/>
-          <polygon id="Rectangle-path_12_" fill="#1F70C1" points="611.034,266.541 694.433,266.541 694.433,294.473 611.034,294.473"/>
-          <polygon id="Rectangle-path_13_" fill="#1F70C1" points="611.034,213.253 694.433,213.253 694.433,241.185 611.034,241.185"/>
-          <polygon id="Shape_24_" fill="#1F70C1" points="733.063,53.288 555.567,53.288 555.567,81.22 742.67,81.22"/>
-          <polygon id="Shape_25_" fill="#1F70C1" points="714.639,0 555.567,0 555.567,27.932 724.247,27.932"/>
-          <polygon id="Rectangle-path_14_" fill="#1F70C1" points="861.034,373.217 1000,373.217 1000,401.05 861.034,401.05"/>
-          <polygon id="Rectangle-path_15_" fill="#1F70C1" points="861.034,319.83 1000,319.83 1000,347.761 861.034,347.761"/>
-          <polygon id="Rectangle-path_16_" fill="#1F70C1" points="861.034,266.541 944.433,266.541 944.433,294.473 861.034,294.473"/>
-          <polygon id="Rectangle-path_17_" fill="#1F70C1" points="861.034,213.253 944.433,213.253 944.433,241.185 861.034,241.185"/>
-          <polygon id="Shape_26_" fill="#1F70C1" points="861.034,187.896 944.433,187.896 944.433,159.964 861.034,159.964 861.034,159.964 785.559,159.964 777.734,182.548 769.909,159.964 694.433,159.964 694.433,159.964 611.034,159.964 611.034,187.896 694.433,187.896 694.433,162.242 703.249,187.896 852.219,187.896 861.034,162.242"/>
-          <polygon id="Shape_27_" fill="#1F70C1" points="944.433,106.577 803.982,106.577 794.374,134.509 944.433,134.509"/>
-          <polygon id="Shape_28_" fill="#1F70C1" points="840.927,0 831.319,27.932 1000,27.932 1000,0"/>
-          <polygon id="Shape_29_" fill="#1F70C1" points="777.734,400.852 787.341,373.217 768.126,373.217"/>
-          <polygon id="Shape_30_" fill="#1F70C1" points="759.311,347.761 796.157,347.761 806.062,319.83 749.505,319.83"/>
-          <polygon id="Shape_31_" fill="#1F70C1" points="740.59,294.473 814.877,294.473 824.683,266.541 730.784,266.541"/>
-          <polygon id="Shape_32_" fill="#1F70C1" points="721.969,241.185 833.597,241.185 843.106,213.253 712.361,213.253"/>
-          <polygon id="Shape_33_" fill="#1F70C1" points="611.034,134.509 761.093,134.509 751.486,106.577 611.034,106.577"/>
-          <polygon id="Shape_34_" fill="#1F70C1" points="812.896,81.22 1000,81.22 1000,53.288 822.405,53.288"/>
-        </g>
-        </g>
-      </svg>
+    <div
+      class="top"
+      style="
+        position: fixed;
+        top: 35px;
+        background-color: white;
+        height: 100px;
+        width: 100%;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+        border-color: lightgrey;
+      "
+    >
+      &nbsp;
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div class="image-container">
-    <i class="fab fa-redhat fa-5x" style="color:white;display: block;margin-left:auto;margin-right:auto;padding-top:22.5px;"></i>
-    </div>
-    <h1 class="w3-margin w3-jumbo">Simple-App GitHub Actions Demo for Kroger by Bates</h1>
-    <p class="w3-xlarge">Leverage OpenShift Developer Tools and GitHub Actions</p>
-    <p class="w3-xlarge">Red Hat GitHub Actions Workflow is designed to help you work seamlessly with Red Hat Developer
-      tools and Openshift clusters.
-    </p>
 
-    <p class="w3-xlarge">
-      This application used the RedHat OpenShift Starter Workflow to get an app running in minutes.
-    </p>
-
-    <a href="https://github.com/redhat-actions" target="_blank">
-      <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">
-        Learn more about RedHat Actions
-      </button>
-    </a> 
-
-    <a href="https://github.com/features/actions" target="_blank">
-      <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">
-        Learn more about GitHub Actions
-      </button>
-    </a> 
-
-    <p class="w3-xlarge">Together, we're super awesome (so is IBM Client Engineering) </p> 
-  </header>
-
-  <div class="w3-row-padding w3-padding-64 w3-container">
-    <div class="w3-content"> 
-      <div class="w3-center">
-        <h1 id="summary">Run an App on OpenShift in 4 Easy Steps </h1> 
+    <!-- Header -->
+    <header
+      class="w3-container w3-center"
+      style="
+        padding: 75px 0px 50px 0px;
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+        border-color: black;
+      "
+    >
+      <div class="kroger">
+        <a href="http://www.kroger.com/" target="_blank">
+          <svg
+            id="Layer_1"
+            data-name="Layer 1"
+            xmlns="http://www.w3.org/2000/svg"
+            width="175px"
+            height="75px"
+            viewBox="0 0 611.7 227.17"
+          >
+            <defs>
+              <style>
+                .cls-1 {
+                  fill: #21409a;
+                }
+              </style>
+            </defs>
+            <path
+              class="cls-1"
+              d="M529.46,274V263.34H510.05v65.55h19.87V292.57q5.12-11.38,17.26-11.39a33.59,33.59,0,0,1,7,.7V263.05a18.24,18.24,0,0,0-6.22-.93q-10.11,0-18.53,11.91"
+              transform="translate(-215.97 -178.98)"
+            />
+            <path
+              class="cls-1"
+              d="M583.46,307.37a17.53,17.53,0,0,1,0-22.54,14.26,14.26,0,0,1,20.16-.9q.46.44.9.9a17.44,17.44,0,0,1,0,22.51,14.3,14.3,0,0,1-20.21.85c-.29-.27-.58-.55-.85-.85m34.39,12.89q9.63-9.8,9.62-24.2a33.12,33.12,0,0,0-9.62-24.12,33.85,33.85,0,0,0-47.73,0,35,35,0,0,0,0,48.16,33.84,33.84,0,0,0,47.73.11"
+              transform="translate(-215.97 -178.98)"
+            />
+            <path
+              class="cls-1"
+              d="M730,289.84a16.06,16.06,0,0,1,4.94-8.42,12.14,12.14,0,0,1,8.13-3,11.29,11.29,0,0,1,8,3.44,13.71,13.71,0,0,1,4.27,7.95Zm13.48-27.72A31.76,31.76,0,0,0,720,271.77q-9.59,9.64-9.58,24.29,0,15,9.18,24.49t24,9.5q10,0,17.09-3.73a47.11,47.11,0,0,0,13-10.32l-14.41-8.06q-5.5,5.06-14.44,5.06-12.86,0-15.11-11.39h45.09a14.18,14.18,0,0,1,.12-1.59c.07-.68.13-1.3.17-1.86s.06-1,.06-1.43q0-14.4-8.89-24.52T743.44,262.1"
+              transform="translate(-215.97 -178.98)"
+            />
+            <path
+              class="cls-1"
+              d="M821.49,262.12q-10.11,0-18.54,11.91V263.34H783.54v65.55h19.88V292.57q5.1-11.38,17.25-11.39a33.59,33.59,0,0,1,7,.7V263.05a18.18,18.18,0,0,0-6.21-.93"
+              transform="translate(-215.97 -178.98)"
+            />
+            <path
+              class="cls-1"
+              d="M490.89,251a61.88,61.88,0,0,0,.53-6.8h0a46.51,46.51,0,0,1,93-1.93c0,.65,0,1.29,0,1.93H603.2a65.24,65.24,0,0,0-130.47-1.12h0a42.43,42.43,0,0,1-.39,5.52c-.86,6.66-3.35,16.26-10.31,24.18-5.45,6.2-12.91,10.39-22.25,12.57V241.78h-21v87.11h21V304.48a69.92,69.92,0,0,0,17.87-5.54l19,29.95h25.16L474,287.35c.7-.72,1.4-1.45,2.07-2.21,10.09-11.48,13.63-24.91,14.82-34.16"
+              transform="translate(-215.97 -178.98)"
+            />
+            <path
+              class="cls-1"
+              d="M679.18,306.24a14.78,14.78,0,0,1-20.9.26l-.26-.26a17.07,17.07,0,0,1,0-22.17,14.75,14.75,0,0,1,20.84-.29l.29.29a17.22,17.22,0,0,1,0,22.17M702,348.05V263.34H683.1v5.58a22.72,22.72,0,0,0-16.91-6.8q-12.62,0-21.85,9.49t-9.24,23.52q0,14,9.47,23.28t21.62,9.31a28.29,28.29,0,0,0,17.14-5.44v25.77h0a40,40,0,1,1-80,0h-18.7A58.71,58.71,0,0,0,702,349.79h0v-1.74Z"
+              transform="translate(-215.97 -178.98)"
+            />
+            <path
+              class="cls-1"
+              d="M708.2,378.25h.8c.87,0,1.57-.29,1.57-1s-.45-1-1.45-1a3.66,3.66,0,0,0-.87.08Zm0,3.85h-1.57v-6.79a12.71,12.71,0,0,1,2.61-.21,4.21,4.21,0,0,1,2.36.5,1.89,1.89,0,0,1,.66,1.49,1.74,1.74,0,0,1-1.41,1.57v.09a2,2,0,0,1,1.24,1.65,5.37,5.37,0,0,0,.5,1.7h-1.7a6,6,0,0,1-.54-1.66c-.12-.74-.54-1.07-1.41-1.07h-.74Zm-4.2-3.56a5.26,5.26,0,0,0,5.1,5.42h.2a5.2,5.2,0,0,0,5.18-5.22v-.16a5.24,5.24,0,1,0-10.48,0v0m12.22,0a7,7,0,1,1-7.2-6.8h.2a6.84,6.84,0,0,1,7,6.66v.14"
+              transform="translate(-215.97 -178.98)"
+            />
+            <path
+              class="cls-1"
+              d="M281.11,319.05A11.12,11.12,0,1,1,270,307.78a11.12,11.12,0,0,1,11.11,11.27Z"
+              transform="translate(-215.97 -178.98)"
+            />
+            <ellipse
+              class="cls-1"
+              cx="146.01"
+              cy="140.07"
+              rx="11.12"
+              ry="11.26"
+            />
+            <path
+              class="cls-1"
+              d="M269.33,245.12a2.57,2.57,0,0,1,.62-2,2.52,2.52,0,0,1,1.9-.87H302a2.52,2.52,0,0,1,2.2,1.29,2.62,2.62,0,0,1,0,2.57l-15.53,27.26a2.53,2.53,0,0,1-3.45,1,2.63,2.63,0,0,1-.4-.28,45.65,45.65,0,0,1-15.34-27.68C269.44,246.07,269.39,245.62,269.33,245.12Zm48.78,39.61a44.08,44.08,0,0,1-21.69-3.44,2.56,2.56,0,0,1-1.42-1.55,2.61,2.61,0,0,1,.21-2.1l18-31.53a2.52,2.52,0,0,1,4.4,0L335,276.63a2.55,2.55,0,0,1-1.07,3.56,44.62,44.62,0,0,1-15.82,4.54Zm30.51-16.28a45.62,45.62,0,0,1-3.53,3.83A2.5,2.5,0,0,1,343,273a2.53,2.53,0,0,1-1.84-1.26L326.55,246.1a2.57,2.57,0,0,1,0-2.57,2.52,2.52,0,0,1,2.2-1.29h27.39a2.54,2.54,0,0,1,1.91.87,2.65,2.65,0,0,1,.62,2,45.73,45.73,0,0,1-10.05,23.34Z"
+              transform="translate(-215.97 -178.98)"
+            />
+            <path
+              class="cls-1"
+              d="M367.64,242.24c-1.78,26-22,47.68-48.41,50.15-29.33,2.74-55.43-19.23-58.13-49C258.65,216.51,241.36,199,216,197.78v18.73c15.69,1.15,25.19,11.25,26.77,28.6,3.43,37.73,34.84,66.16,71.54,66.16q3.29,0,6.65-.31c36-3.36,63.38-33.2,65.18-68.75Z"
+              transform="translate(-215.97 -178.98)"
+            />
+          </svg>
+        </a>
       </div>
-        <ol class="w3-xlarge">
-          <li> Get a sandbox cluster
-            <a href="https://developers.redhat.com/developer-sandbox " target="_blank">
-              https://developers.redhat.com/developer-sandbox
-            </a>
-          </li>
-          <li> Add the OpenShift starter workflow to your favourite container based app
-            or fork <a href="https://github.com/jduimovich/simple-app" target="_blank">
-              this sample app
-            </a> and modify the OpenShift Starter Workflow for your environment.
-          </li>
-          <li>
-            Configure the secrets for your OpenShift cluster and preferred container registry.
-          </li>
-          <li>
-            Push changes to your app and the built-in workflow will have this application running in minutes.
-          </li>
-        </ol> 
+      <div class="ibm">
+        <a href="http://www.ibm.com/" target="_blank">
+          <svg
+            version="1.1"
+            id="Livello_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            width="100px"
+            height="50px"
+            viewBox="0 0 1000 401.149"
+            enable-background="new 0 0 1000 401.149"
+            xml:space="preserve"
+          >
+            <g>
+              <g>
+                <polygon
+                  id="Rectangle-path"
+                  fill="#1F70C1"
+                  points="0,373.217 194.433,373.217 194.433,401.05 0,401.05 		"
+                />
+                <polygon
+                  id="Rectangle-path_1_"
+                  fill="#1F70C1"
+                  points="0,319.83 194.433,319.83 194.433,347.761 0,347.761 		"
+                />
+                <polygon
+                  id="Rectangle-path_2_"
+                  fill="#1F70C1"
+                  points="55.468,266.541 138.867,266.541 138.867,294.473 55.468,294.473 		"
+                />
+                <polygon
+                  id="Rectangle-path_3_"
+                  fill="#1F70C1"
+                  points="55.468,213.253 138.867,213.253 138.867,241.185 55.468,241.185 		"
+                />
+                <polygon
+                  id="Rectangle-path_4_"
+                  fill="#1F70C1"
+                  points="55.468,159.964 138.867,159.964 138.867,187.896 55.468,187.896 		"
+                />
+                <polygon
+                  id="Rectangle-path_5_"
+                  fill="#1F70C1"
+                  points="55.468,106.577 138.867,106.577 138.867,134.509 55.468,134.509 		"
+                />
+                <rect
+                  id="Rectangle-path_6_"
+                  y="53.288"
+                  fill="#1F70C1"
+                  width="194.433"
+                  height="27.932"
+                />
+                <rect
+                  id="Rectangle-path_7_"
+                  fill="#1F70C1"
+                  width="194.433"
+                  height="27.932"
+                />
+              </g>
+              <g>
+                <path
+                  id="Shape_16_"
+                  fill="#1F70C1"
+                  d="M222.167,347.761h299.029c5.051-8.617,8.815-18.027,11.094-27.932H222.167V347.761z"
+                />
+                <path
+                  id="Shape_17_"
+                  fill="#1F70C1"
+                  d="M497.92,213.253H277.734v27.932h243.463C514.857,230.487,507.032,221.078,497.92,213.253z"
+                />
+                <path
+                  id="Shape_18_"
+                  fill="#1F70C1"
+                  d="M277.734,159.964v27.932H497.92c9.311-7.825,17.135-17.235,23.277-27.932H277.734z"
+                />
+                <path
+                  id="Shape_19_"
+                  fill="#1F70C1"
+                  d="M521.197,53.288H222.167V81.22H532.29C529.715,71.315,525.951,61.906,521.197,53.288z"
+                />
+                <path
+                  id="Shape_20_"
+                  fill="#1F70C1"
+                  d="M429.279,0H222.167v27.932h278.526C482.072,10.697,456.815,0,429.279,0z"
+                />
+                <rect
+                  id="Rectangle-path_8_"
+                  x="277.734"
+                  y="106.577"
+                  fill="#1F70C1"
+                  width="83.3"
+                  height="27.932"
+                />
+                <path
+                  id="Shape_21_"
+                  fill="#1F70C1"
+                  d="M444.433,134.509h87.163c2.476-8.914,3.764-18.324,3.764-27.932h-90.927L444.433,134.509L444.433,134.509z"
+                />
+                <polygon
+                  id="Rectangle-path_9_"
+                  fill="#1F70C1"
+                  points="277.734,266.541 361.034,266.541 361.034,294.473 277.734,294.473"
+                />
+                <path
+                  id="Shape_22_"
+                  fill="#1F70C1"
+                  d="M444.433,266.541v27.932h90.927c0-9.608-1.288-19.017-3.764-27.932H444.433z"
+                />
+                <path
+                  id="Shape_23_"
+                  fill="#1F70C1"
+                  d="M222.167,400.852l207.112,0.297c27.734,0,52.793-10.697,71.513-27.932H222.167V400.852z"
+                />
+              </g>
+              <g>
+                <polygon
+                  id="Rectangle-path_10_"
+                  fill="#1F70C1"
+                  points="555.567,373.217 694.433,373.217 694.433,401.05 555.567,401.05"
+                />
+                <polygon
+                  id="Rectangle-path_11_"
+                  fill="#1F70C1"
+                  points="555.567,319.83 694.433,319.83 694.433,347.761 555.567,347.761"
+                />
+                <polygon
+                  id="Rectangle-path_12_"
+                  fill="#1F70C1"
+                  points="611.034,266.541 694.433,266.541 694.433,294.473 611.034,294.473"
+                />
+                <polygon
+                  id="Rectangle-path_13_"
+                  fill="#1F70C1"
+                  points="611.034,213.253 694.433,213.253 694.433,241.185 611.034,241.185"
+                />
+                <polygon
+                  id="Shape_24_"
+                  fill="#1F70C1"
+                  points="733.063,53.288 555.567,53.288 555.567,81.22 742.67,81.22"
+                />
+                <polygon
+                  id="Shape_25_"
+                  fill="#1F70C1"
+                  points="714.639,0 555.567,0 555.567,27.932 724.247,27.932"
+                />
+                <polygon
+                  id="Rectangle-path_14_"
+                  fill="#1F70C1"
+                  points="861.034,373.217 1000,373.217 1000,401.05 861.034,401.05"
+                />
+                <polygon
+                  id="Rectangle-path_15_"
+                  fill="#1F70C1"
+                  points="861.034,319.83 1000,319.83 1000,347.761 861.034,347.761"
+                />
+                <polygon
+                  id="Rectangle-path_16_"
+                  fill="#1F70C1"
+                  points="861.034,266.541 944.433,266.541 944.433,294.473 861.034,294.473"
+                />
+                <polygon
+                  id="Rectangle-path_17_"
+                  fill="#1F70C1"
+                  points="861.034,213.253 944.433,213.253 944.433,241.185 861.034,241.185"
+                />
+                <polygon
+                  id="Shape_26_"
+                  fill="#1F70C1"
+                  points="861.034,187.896 944.433,187.896 944.433,159.964 861.034,159.964 861.034,159.964 785.559,159.964 777.734,182.548 769.909,159.964 694.433,159.964 694.433,159.964 611.034,159.964 611.034,187.896 694.433,187.896 694.433,162.242 703.249,187.896 852.219,187.896 861.034,162.242"
+                />
+                <polygon
+                  id="Shape_27_"
+                  fill="#1F70C1"
+                  points="944.433,106.577 803.982,106.577 794.374,134.509 944.433,134.509"
+                />
+                <polygon
+                  id="Shape_28_"
+                  fill="#1F70C1"
+                  points="840.927,0 831.319,27.932 1000,27.932 1000,0"
+                />
+                <polygon
+                  id="Shape_29_"
+                  fill="#1F70C1"
+                  points="777.734,400.852 787.341,373.217 768.126,373.217"
+                />
+                <polygon
+                  id="Shape_30_"
+                  fill="#1F70C1"
+                  points="759.311,347.761 796.157,347.761 806.062,319.83 749.505,319.83"
+                />
+                <polygon
+                  id="Shape_31_"
+                  fill="#1F70C1"
+                  points="740.59,294.473 814.877,294.473 824.683,266.541 730.784,266.541"
+                />
+                <polygon
+                  id="Shape_32_"
+                  fill="#1F70C1"
+                  points="721.969,241.185 833.597,241.185 843.106,213.253 712.361,213.253"
+                />
+                <polygon
+                  id="Shape_33_"
+                  fill="#1F70C1"
+                  points="611.034,134.509 761.093,134.509 751.486,106.577 611.034,106.577"
+                />
+                <polygon
+                  id="Shape_34_"
+                  fill="#1F70C1"
+                  points="812.896,81.22 1000,81.22 1000,53.288 822.405,53.288"
+                />
+              </g>
+            </g>
+          </svg>
+        </a>
+      </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <div class="image-container">
+        <h1 class="w3-xxlarge header-one">
+          Simple-App GitHub Actions Demo for Kroger
+        </h1>
+      </div>
+      <p class="w3-xlarge">
+        Leverage OpenShift Developer Tools and GitHub Actions
+      </p>
+      <p class="w3-xlarge">
+        Red Hat GitHub Actions Workflow is designed to help you work seamlessly
+        with Red Hat Developer tools and Openshift clusters.
+      </p>
+      <a
+        href="http://localhost:8080/Kroger_CP4I_Dev_Automation.png"
+        target="_blank"
+      >
+        <button
+          class="w3-button w3-black w3-padding-large w3-large w3-margin-top"
+        >
+          Kroger CP4I Dev Automation
+        </button>
+      </a>
 
-        <p class="w3-xlarge"></p>
-        <div class="w3-center">
-          <a href="https://github.com/jduimovich/simple-app" target="_blank">
-            <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">
-              Check out the completed code here !
-            </button>
-          </a>
-        </div>
-      </div>  
-  </div>
-</body>
+      <a href="http://localhost:8080/Kroger_MQ_ACE_Flow.pdf" target="_blank">
+        <button
+          class="w3-button w3-black w3-padding-large w3-large w3-margin-top"
+        >
+          Kroger MQ ACE Flow
+        </button>
+      </a>
+      <br />
+      <br />
+      <br />
+      <a href="https://www.ibm.com/lets-create/?lnk=hpmlc" target="_blank">
+        <img src="ibm_ce.jpeg" class="ibm-ce" />
+      </a>
+    </header>
 
+    <div class="w3-row-padding w3-padding-32 w3-container w3-center">
+      <div class="w3-content" style="max-width: 1660px">
+        <h1 class="w3-xlarge">Shop Your Way</h1>
+        <p class="w3-large">
+          Get hand-picked fresh with FREE* pickup, or get all your favorites
+          brought right to your door with delivery. No matter how you choose to
+          shop, we always have fresh you can count on.
+        </p>
+        <img src="kroger_1.webp" class="bottom-images" />
+        <img src="kroger_2.jpeg" class="bottom-images" />
+        <img src="kroger_3.webp" class="bottom-images" />
+        <img src="kroger_4.webp" class="bottom-images" />
+      </div>
+    </div>
+  </body>
 </html>
